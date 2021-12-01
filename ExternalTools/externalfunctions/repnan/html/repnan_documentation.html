@@ -1,0 +1,204 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>repnan documentation</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-11-01"><meta name="DC.source" content="repnan_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>repnan</tt> documentation</h1><!--introduction--><p>This function replaces <tt>NaN</tt> values in a 1D array by replacing them with interpolated or neighboring values. Interpolation schemes assume data are evenly spaced.  This function does not extrapolate.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#10">Author Info</a></li></ul></div><h2>Syntax<a name="1"></a></h2><pre>x = repnan(x);
+x = repnan(x,method);</pre><h2>Description<a name="2"></a></h2><p><tt>x = repnan(x)</tt> returns <tt>x</tt> sans NaNs.</p><p><tt>x = repnan(x,method)</tt> specifies a method for replacing the original <tt>x</tt>'s NaNs. Methods can be</p><div><ul><li><tt>'linear'</tt> (default) performs linear interpolation over missing values in <tt>x</tt>,</li><li><tt>'nearest'</tt> performs nearest-neighbor interpolation,</li><li><tt>'spline'</tt> performs spline interpolation using not-a-knot end conditions,</li><li><tt>'pchip'</tt> is shape-preserving piecewise cubic interpolation,</li><li><tt>'cubic'</tt> same as <tt>'pchip'</tt>,</li><li><tt>'v5cubic'</tt> cubic convolution via Matlab v5 algorithm</li><li><tt>'next'</tt> replaces <tt>NaN</tt> values in <tt>x</tt> with the next non-NaN value in <tt>x</tt>,</li><li><tt>'previous'</tt> replaces <tt>NaN</tt> values in <tt>x</tt> with the previous non-NaN value in <tt>x</tt>,</li></ul></div><h2>Examples<a name="3"></a></h2><p>You measured some data in the lab, but the ground connection on your sensor's cable was spotty, so you've got some missing data entries. Here's the data you have:</p><pre class="codeinput">t = 1:.5:10;
+x = round(10*sin(t));
+x([3 7 8 9 16:18]) = NaN
+
+plot(t,x,<span class="string">'o-'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'color'</span>,[0.8039 0.6902 0.3294])
+box <span class="string">off</span>
+axis([0 10 -10 10.5])
+xlabel(<span class="string">'time (s)'</span>)
+ylabel(<span class="string">'signal amplitude (V)'</span>)
+text(0,0,<span class="string">' measured data'</span>,<span class="string">'color'</span>,[0.8039 0.6902 0.3294],<span class="string">'fontweight'</span>,<span class="string">'bold'</span>)
+hold <span class="string">on</span>
+</pre><pre class="codeoutput">x =
+  Columns 1 through 13
+     8    10   NaN     6     1    -4   NaN   NaN   NaN    -7    -3     2     7
+  Columns 14 through 19
+     9    10   NaN   NaN   NaN    -5
+</pre><img vspace="5" hspace="5" src="repnan_documentation_01.png" alt=""> <p>There are a number of ways to take care of those <tt>NaN</tt> values. One of the simplest workarounds is to linearly interpolate between valid <tt>x</tt> values. If no interpolation method is specified, <tt>repnan</tt> interpolates linearly:</p><pre class="codeinput">xlin = repnan(x);
+plot(t,xlin,<span class="string">'-'</span>,<span class="string">'color'</span>,[0.6902 0.4039 0.7569])
+text(0,-1,<span class="string">' linear interpolation'</span>,<span class="string">'color'</span>,[0.6902 0.4039 0.7569])
+</pre><img vspace="5" hspace="5" src="repnan_documentation_02.png" alt=""> <p>Cubic interpolation might be a better choice for this application:</p><pre class="codeinput">xcubic = repnan(x,<span class="string">'pchip'</span>);
+plot(t,xcubic,<span class="string">'-'</span>,<span class="string">'color'</span>,[0.5922 0.7333 0.7490])
+text(0,-2,<span class="string">' cubic interpolation'</span>,<span class="string">'color'</span>,[0.5922 0.7333 0.7490])
+</pre><img vspace="5" hspace="5" src="repnan_documentation_03.png" alt=""> <p>Or better yet, spline:</p><pre class="codeinput">xspline = repnan(x,<span class="string">'spline'</span>);
+plot(t,xspline,<span class="string">'color'</span>,[0.7529 0.3216 0.2863])
+text(0,-3, <span class="string">' spline interpolation'</span>,<span class="string">'color'</span>,[0.7529 0.3216 0.2863])
+</pre><img vspace="5" hspace="5" src="repnan_documentation_04.png" alt=""> <p>For some applications, you might want the nearest neighbor:</p><pre class="codeinput">xnear = repnan(x,<span class="string">'nearest'</span>);
+plot(t,xnear,<span class="string">'color'</span>,[0.3765 0.2588 0.3725])
+text(0,-4, <span class="string">' nearest neighbor'</span>,<span class="string">'color'</span>,[0.3765 0.2588 0.3725])
+</pre><img vspace="5" hspace="5" src="repnan_documentation_05.png" alt=""> <p>Sometimes you may want to replace missing data with the most recent or previous valid value in <tt>x</tt>:</p><pre class="codeinput">xprev = repnan(x,<span class="string">'previous'</span>);
+plot(t,xprev,<span class="string">'color'</span>,[0.3373 0.3804 0.2353])
+text(0,-5,<span class="string">' previous neighbor'</span>,<span class="string">'color'</span>,[0.3373 0.3804 0.2353])
+</pre><img vspace="5" hspace="5" src="repnan_documentation_06.png" alt=""> <p>And other times you may want to replace missing data with the next valid value in <tt>x</tt>:</p><pre class="codeinput">xnext = repnan(x,<span class="string">'next'</span>);
+plot(t,xnext,<span class="string">'color'</span>,[0.4941 0.8078 0.3686])
+text(0,-6,<span class="string">' next neighbor'</span>,<span class="string">'color'</span>,[0.4941 0.8078 0.3686])
+</pre><img vspace="5" hspace="5" src="repnan_documentation_07.png" alt=""> <h2>Author Info<a name="10"></a></h2><p>Written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (<a href="http://www.ig.utexas.edu/people/students/cgreene/">UTIG</a>), October 31, 2014.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |repnan| documentation
+% This function replaces |NaN| values in a 1D array by replacing them with
+% interpolated or neighboring values. Interpolation schemes assume data are
+% evenly spaced.  This function does not extrapolate. 
+% 
+%% Syntax
+% 
+%  x = repnan(x); 
+%  x = repnan(x,method); 
+% 
+%% Description 
+% 
+% |x = repnan(x)| returns |x| sans NaNs. 
+% 
+% |x = repnan(x,method)| specifies a method for replacing the original |x|'s
+% NaNs. Methods can be 
+% 
+% * |'linear'| (default) performs linear interpolation over missing values
+% in |x|, 
+% * |'nearest'| performs nearest-neighbor interpolation,  
+% * |'spline'| performs spline interpolation using not-a-knot end conditions,
+% * |'pchip'| is shape-preserving piecewise cubic interpolation,
+% * |'cubic'| same as |'pchip'|,
+% * |'v5cubic'| cubic convolution via Matlab v5 algorithm
+% * |'next'| replaces |NaN| values in |x| with the next non-NaN value in
+% |x|, 
+% * |'previous'| replaces |NaN| values in |x| with the previous non-NaN value in
+% |x|, 
+% 
+%% Examples
+% You measured some data in the lab, but the ground connection on your
+% sensor's cable was spotty, so you've got some missing data entries. 
+% Here's the data you have: 
+
+t = 1:.5:10; 
+x = round(10*sin(t));
+x([3 7 8 9 16:18]) = NaN
+
+plot(t,x,'o-','linewidth',2,'color',[0.8039 0.6902 0.3294])
+box off
+axis([0 10 -10 10.5])
+xlabel('time (s)') 
+ylabel('signal amplitude (V)')
+text(0,0,' measured data','color',[0.8039 0.6902 0.3294],'fontweight','bold')
+hold on
+
+%% 
+% There are a number of ways to take care of those |NaN| values. One of the
+% simplest workarounds is to linearly interpolate between valid |x| values.
+% If no interpolation method is specified, |repnan| interpolates linearly: 
+
+xlin = repnan(x);
+plot(t,xlin,'-','color',[0.6902 0.4039 0.7569])
+text(0,-1,' linear interpolation','color',[0.6902 0.4039 0.7569])
+
+%% 
+% Cubic interpolation might be a better choice for this application:
+
+xcubic = repnan(x,'pchip'); 
+plot(t,xcubic,'-','color',[0.5922 0.7333 0.7490])
+text(0,-2,' cubic interpolation','color',[0.5922 0.7333 0.7490]) 
+
+%% 
+% Or better yet, spline: 
+
+xspline = repnan(x,'spline'); 
+plot(t,xspline,'color',[0.7529 0.3216 0.2863]) 
+text(0,-3, ' spline interpolation','color',[0.7529 0.3216 0.2863]) 
+
+%%
+% For some applications, you might want the nearest neighbor: 
+
+xnear = repnan(x,'nearest'); 
+plot(t,xnear,'color',[0.3765 0.2588 0.3725]) 
+text(0,-4, ' nearest neighbor','color',[0.3765 0.2588 0.3725]) 
+
+%% 
+% Sometimes you may want to replace missing data with the most recent 
+% or previous valid value in |x|:
+
+xprev = repnan(x,'previous'); 
+plot(t,xprev,'color',[0.3373 0.3804 0.2353]) 
+text(0,-5,' previous neighbor','color',[0.3373 0.3804 0.2353]) 
+
+%% 
+% And other times you may want to replace missing data with the next valid
+% value in |x|: 
+
+xnext = repnan(x,'next'); 
+plot(t,xnext,'color',[0.4941 0.8078 0.3686]) 
+text(0,-6,' next neighbor','color',[0.4941 0.8078 0.3686])
+
+%% Author Info
+% 
+% Written by <http://www.chadagreene.com Chad A. Greene> of the
+% University of Texas Institute for Geophysics
+% (<http://www.ig.utexas.edu/people/students/cgreene/ UTIG>), October 31, 2014.
+##### SOURCE END #####
+--></body></html>

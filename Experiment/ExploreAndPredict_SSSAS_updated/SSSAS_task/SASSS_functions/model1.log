@@ -1,0 +1,48 @@
+Starting Model 1
+OptimizeGA
+===============================
+Saturation threshold = 2
+Setting up variables
+{Error using <a href="matlab:helpUtils.errorDocCallback('optimizeGA', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m', 52)" style="font-weight:bold">optimizeGA</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m',52,0)">line 52</a>)
+Frequency and condition vectors must be same length, or freq must be 1 longer for jitter
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ga_optimize_runControl', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m', 224)" style="font-weight:bold">ga_optimize_runControl</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m',224,0)">line 224</a>)
+   M = optimizeGA(GA);
+} 
+ga_optimize_runControl
+Starting Model 1
+OptimizeGA
+===============================
+Saturation threshold = 2
+Setting up variables
+{Error using <a href="matlab:helpUtils.errorDocCallback('optimizeGA', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m', 52)" style="font-weight:bold">optimizeGA</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m',52,0)">line 52</a>)
+Frequency and condition vectors must be same length, or freq must be 1 longer for jitter
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ga_optimize_runControl', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m', 220)" style="font-weight:bold">ga_optimize_runControl</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m',220,0)">line 220</a>)
+   M = optimizeGA(GA);
+} 
+ga_optimize_runControl
+Starting Model 1
+OptimizeGA
+===============================
+Saturation threshold = 2
+Setting up variables
+{Error using <a href="matlab:helpUtils.errorDocCallback('optimizeGA', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m', 52)" style="font-weight:bold">optimizeGA</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m',52,0)">line 52</a>)
+Frequency and condition vectors must be same length, or freq must be 1 longer for jitter
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ga_optimize_runControl', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m', 220)" style="font-weight:bold">ga_optimize_runControl</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m',220,0)">line 220</a>)
+   M = optimizeGA(GA);
+} 
+ga_optimize_runControl
+Starting Model 1
+OptimizeGA
+===============================
+Saturation threshold = 2
+Setting up variables
+{Error using <a href="matlab:helpUtils.errorDocCallback('optimizeGA', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m', 52)" style="font-weight:bold">optimizeGA</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\OptimizeDesign11\optimizeGA.m',52,0)">line 52</a>)
+Frequency and condition vectors must be same length, or freq must be 1 longer for jitter
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ga_optimize_runControl', 'C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m', 220)" style="font-weight:bold">ga_optimize_runControl</a> (<a href="matlab: opentoline('C:\Users\Romain\Google Drive\EXPERIENCES (programmes)\fMRI_SAS-SS\SASSS_functions\ga_optimize_runControl.m',220,0)">line 220</a>)
+   M = optimizeGA(GA);
+} 
+ga_optimize_runControl
