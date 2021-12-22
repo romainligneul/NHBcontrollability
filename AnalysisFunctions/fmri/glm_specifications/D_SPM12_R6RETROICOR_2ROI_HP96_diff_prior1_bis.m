@@ -59,8 +59,8 @@ F.FIR.do = 0;
 %     F.doest = 1;
 % end;
 
-F.contrastleft = {};%, 'QUEST_HIT_curiosity^1', 'QUEST_HIT_curiosity^1', 'QUEST_CR_curiosity^1', 'RESP_HIT_surprise^1','RESP_HIT_surprise^1', 'RESP_CR_surprise^1'}; %'seen', 'unseen', 'seen', 'unseen'};
-F.contrastright = {};%, 'QUEST_CR_curiosity^1', 'QUEST_MISS_curiosity^1', 'QUEST_MISS_curiosity^1', 'RESP_CR_surprise^1', 'RESP_MISS_surprise^1', 'RESP_MISS_surprise^1'};% 'unknown_quest', 'unknownquest_curiosity^1 '};%'hashtag', 'hashtag', 'unseen', 'seen'};
+F.contrastleft = {};
+F.contrastright = {};
 
 F.estfunc = 'spm_spm'; % or spm_spm_Bayes or spm_spm_quickest
 % F.check_imgsuf =['.*ResMS.img'];
@@ -289,18 +289,7 @@ for s = 1:32;
 %             
 
         n=0;
-        
-        %
-%         n=n+1;
-%         pmod(1).name{n} = 'std_PEdiff';
-%         pmod(1).param{n} = zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-%         n=n+1;
-%         pmod(1).name{n} = 'std_PEdiff';
-%         pmod(1).param{n} = zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-
-% %        
+           
         n=n+1;
         pmod(1).name{n} = 'std_RT';
         pmod(1).param{n} = zscore(std_RT);
@@ -311,24 +300,11 @@ for s = 1:32;
         pmod(1).name{n} = 'std_PEdiff';
         pmod(1).param{n} = zscore(std_SSpe-std_SASpe); %zscore(std_SSpe'-std_SASpe');
         pmod(1).poly{n} = 1;
-%         
-%                 n=n+1;
-%         pmod(1).name{n} = 'std_sasPE';
-%         pmod(1).param{n} = zscore(std_SASpe); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-% %         
-       n=n+1;
+
+        n=n+1;
         pmod(1).name{n} = 'std_state_repeat';
         pmod(1).param{n} = zscore(std_state_repeat); %zscore(std_SSpe'-std_SASpe');
-        pmod(1).poly{n} = 1;
-% %         
-%         %
-        
-%         n=n+1;
-%         pmod(1).name{n} = 'std_order';
-%         pmod(1).param{n} = zscore(repmat([1:5]',length(std_SASpe)/5,1));%*std(std_SASpe); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-        %                
+        pmod(1).poly{n} = 1;           
         
         pmod(2).name{1} = 'prd_omega';
         pmod(2).param{1} = zscore(prd_sigomega');
@@ -337,32 +313,7 @@ for s = 1:32;
         pmod(2).name{2} = 'prd_RT';
         pmod(2).param{2} = zscore(prd_RT);
         pmod(2).poly{2} = 1;
-        
-%         pmod(2).name{2} = 'prd_order';
-%         pmod(2).param{2} = zscore(mod([1:length(prd_RT)]',2));
-%         pmod(2).poly{2} = 1;
-%         pmod(2).name{2} = 'prd_intInf';
-%         pmod(2).param{2} = prd_intInf;
-%         pmod(2).poly{2} = 1;  
-%         
 
-        
-%         pmod(6).name{1} = 'std1_omega';
-%         pmod(6).param{1} = std1_omega';
-%         pmod(6).poly{1} = 1;    
-%         
-%         pmod(6).name{2} = 'std1_RT';
-%         pmod(6).param{2} = std1_RT';
-%         pmod(6).poly{2} = 1;        
-%         
-%         pmod(7).name{2} = 'SASswitch_quad';
-%         pmod(7).param{2} = std_SASswitch_quad';
-%         pmod(7).poly{2} = 1;   
-%         
-%         pmod(1).name{3} = 'omega';
-%         pmod(1).param{3} = zscore(std_omega);
-%         pmod(1).poly{3} = 1;          
-%         
         %%%%%%%%% Create RUN_MAT file
 
         %%% names
@@ -374,16 +325,6 @@ for s = 1:32;
         names{6} = 'motor';
         names{7} = 'std1';
         
-%         dummat = [];
-%         for ppp = 1:length(pmod(1).param)
-%             dummat = [dummat,pmod(1).param{ppp}];
-%         end
-%         dumr = corrcoef(dummat);
-% %         summed_r = summed_r+dumr;
-        
-       % names{10} = 'warn';
-       % names{11} = 'motor';
-       
         %%% specify orthogonalization per condition
         orth = repmat({false}, length(names),1);
          orth{1} = false;
@@ -391,9 +332,6 @@ for s = 1:32;
         
         %%% durations
         durations(1:length(names)) = {0};
-%         durations(7) = {std1_RT'};
-%         durations(1) = {std_RT'};
-%         durations(2) = {prd_RT'};
         
         %%% onsets
         onsets{1} = T.std_onset; 
@@ -404,8 +342,6 @@ for s = 1:32;
         onsets{5} = T.prdfb_onset_neg;
         onsets{6} = T.motor;
         onsets{7} = T.std_onset1;
-       % onsets{10} = T.warn_onset;
-       % onsets{11} = T.motor;
        
        if numel(onsets{1})~=numel(pmod(1).param{1})
            error('problem with regressor length')
