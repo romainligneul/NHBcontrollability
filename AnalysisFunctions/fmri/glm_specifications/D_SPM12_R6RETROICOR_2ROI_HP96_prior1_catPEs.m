@@ -121,27 +121,17 @@ for s = 1:32;
         omega = muX{s}(omega_ind,block_ind(r):block_ind(r+1)-1);
         
         omega_prv = [0 muX{s}(omega_ind,block_ind(r):block_ind(r+1)-2)];
-        
-        % decision omegaqstat
-        
+
         P_obsf = phiFitted;
          in_obsf = options.inG;
-%         u_obsf = out{s}.u(:,block_ind(r):block_ind(r+1)-1);
-%         x_obsf = posterior{s}.muX(:,block_ind(r):block_ind(r+1)-1);
-%         f_obsf = out{s}.options.g_fname;
+         
         % 
         sigomega = VBA_sigmoid(omegaraw, 'slope', phiFitted(s,2), 'center', phiFitted(s,3));       
         
          omegaPE = [0 diff(omegaraw)];
-%         omegaPE = [0 diff(sigomega)];
-
-%         
+       
          SSpe= 0;
          SASpe = 0;
-%         SSalpha = thetaFitted(s,1);
-%         SASalpha = thetaFitted(s,1);
-%         SSexp = thetaFitted(s,2);
-%         SASexp = thetaFitted(s,2);
         state_repeat=0;
         t = 0;
         for tt = block_ind(r):block_ind(r+1)-1
@@ -168,10 +158,7 @@ for s = 1:32;
         % computations; it could be done by using the u matrix too, but we adopt
         % a different approach based on logfile info.
         load([B.mdir 'task_DATA/' B.SSAS{r}{s,1}],'L', 'E');
-%         remove_ind = repmat([1 1 1 1 1 1 0 0], 1, (size(posterior{s}.muX,2)/8));
-%         explore_X = posterior{s}.muX(:,find(remove_ind));
-%         block_ind = [find(isnan(out{s}.u(1,find(remove_ind)))  | out{s}.u(1,find(remove_ind))==0) length(out{s}.u(1,find(remove_ind)))+1];
-%         block_idx = block_ind(r):block_ind(r+1);
+        
         choice_std = L.predict.log(:,15);
   
         
@@ -211,10 +198,7 @@ for s = 1:32;
         T.prdfb_onset_neg = L.predict.log(prd_fb==-1,24)-1-L.start_time; 
         R.fb_neg(s,r) = numel(T.prdfb_onset_neg);
         T.prdfb_onset_neutral = L.predict.log(prd_fb==0,24)-1-L.start_time;
-        T.prdfb_onset = L.predict.log(:,24)-1-L.start_time;
-        
-        %R.fb_neg(s,r) = numel(T.prdfb_onset_neg);
-                
+        T.prdfb_onset = L.predict.log(:,24)-1-L.start_time;               
         
         %%% standard trials by devL.explore.log(:,11)<2iants & condition for categorical analysis
         deviant = 0;
@@ -262,14 +246,9 @@ for s = 1:32;
 
         std_omega = omega(cond_ind<2)';
         std_sigomega = sigomega(cond_ind<2)';
-        
-        
         std_omega_prv = omega_prv(cond_ind<2)';
+        
         % previous omega
-%         std_omega = [0; std_omega(1:end-1)];
-        
-%         std_intInf = intInf(cond_ind<2)';
-        
         std1_omega = omega(cond_ind==3)';
 
   
@@ -282,13 +261,9 @@ for s = 1:32;
         prd_omega = omega(cond_ind==2);
         prd_sigomega = sigomega(cond_ind==2);
 
-%         prd_intInf = intInf(cond_ind==2)';
-
         state = L.explore.log(:,8);
         std_muX = muX{s}(:,cond_ind<2);
         
-%             
-
         n=0;
         
         SS_bool = std_SSpe>prctile(std_SSpe,200/3);
@@ -312,76 +287,7 @@ for s = 1:32;
         [coefR p] = corr(std_SSpe',std_SASpe');
         
         keep_corr(s,r)=coefR(1);
-        
-%         %
-%         n=n+1;
-%         pmod(1).name{n} = 'std_omega';
-%         pmod(1).param{n} = std_omega;
-%         pmod(1).poly{n} = 1; 
-% %         
-%         n=n+1;
-%         pmod(1).name{n} = 'std_omega_prv';
-%         pmod(1).param{n} = std_omega_prv;
-%         pmod(1).poly{n} = 1;
-%         
-%         n=n+1;
-%         pmod(1).name{n} = 'std_ssPE';
-%         pmod(1).param{n} = zscore(std_SSpe'); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-%         
-%         n=n+1;
-%         pmod(1).name{n} = 'std_sasPE';
-%         pmod(1).param{n} = zscore(std_SASpe'); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-        
-
-% 
-%         n=n+1;
-%         pmod(1).name{n} = 'std_ssPE_RT';
-%         pmod(1).param{n} = zscore((std_SSpe/std(std_SSpe)).*(std_RT/std(std_RT))'); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;        
-%         
-%         n=n+1;
-%         pmod(1).name{n} = 'std_sasPE_RT';
-%         pmod(1).param{n} = zscore((std_SASpe/std(std_SASpe)).*(std_RT/std(std_RT))'); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;     
-%         
-%         r_dum = corr(pmod(1).param{1}', pmod(1).param{2}');
-%         corr_PERT(s,r) = r_dum(1);
-%         
-%         n=n+1;
-%         pmod(1).name{n} = 'std_absomegaPE';
-%         pmod(1).param{n} = zscore(std_omegaPE'.^2); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-% %        
-%         n=n+1;
-%         pmod(1).name{n} = 'std_RT';
-%         pmod(1).param{n} = zscore(std_RT);
-%         pmod(1).poly{n} = 1;
-% 
-% %                 n=n+1;
-%         pmod(1).name{n} = 'std_ssPE';
-%         pmod(1).param{n} = zscore(std_SSpe); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-%         
-%                 n=n+1;
-%         pmod(1).name{n} = 'std_sasPE';
-%         pmod(1).param{n} = zscore(std_SASpe); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-% %         
-%         n=n+1;
-%         pmod(1).name{n} = 'std_state_repeat';
-%         pmod(1).param{n} = zscore(std_state_repeat); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-%         
-%         %
-        
-%         n=n+1;
-%         pmod(1).name{n} = 'std_order';
-%         pmod(1).param{n} = zscore(repmat([1:5]',length(std_SASpe)/5,1));%*std(std_SASpe); %zscore(std_SSpe'-std_SASpe');
-%         pmod(1).poly{n} = 1;
-        %                
-        
+                
         pmod(5).name{1} = 'prd_omega';
         pmod(5).param{1} = zscore(prd_sigomega');
         pmod(5).poly{1} = 1;
@@ -389,32 +295,7 @@ for s = 1:32;
         pmod(5).name{2} = 'prd_RT';
         pmod(5).param{2} = zscore(prd_RT);
         pmod(5).poly{2} = 1;
-        
-%         pmod(2).name{2} = 'prd_order';
-%         pmod(2).param{2} = zscore(mod([1:length(prd_RT)]',2));
-%         pmod(2).poly{2} = 1;
-%         pmod(2).name{2} = 'prd_intInf';
-%         pmod(2).param{2} = prd_intInf;
-%         pmod(2).poly{2} = 1;  
-%         
-
-        
-%         pmod(6).name{1} = 'std1_omega';
-%         pmod(6).param{1} = std1_omega';
-%         pmod(6).poly{1} = 1;    
-%         
-%         pmod(6).name{2} = 'std1_RT';
-%         pmod(6).param{2} = std1_RT';
-%         pmod(6).poly{2} = 1;        
-%         
-%         pmod(7).name{2} = 'SASswitch_quad';
-%         pmod(7).param{2} = std_SASswitch_quad';
-%         pmod(7).poly{2} = 1;   
-%         
-%         pmod(1).name{3} = 'omega';
-%         pmod(1).param{3} = zscore(std_omega);
-%         pmod(1).poly{3} = 1;          
-%         
+                 
         %%%%%%%%% Create RUN_MAT file
 
         %%% names
@@ -428,16 +309,6 @@ for s = 1:32;
         names{8} = 'prd_fb_neg';        
         names{9} = 'motor';
         names{10} = 'std1';
-        
-%         dummat = [];
-%         for ppp = 1:length(pmod(1).param)
-%             dummat = [dummat,pmod(1).param{ppp}];
-%         end
-%         dumr = corrcoef(dummat);
-% %         summed_r = summed_r+dumr;
-        
-       % names{10} = 'warn';
-       % names{11} = 'motor';
        
         %%% specify orthogonalization per condition
         orth = repmat({false}, length(names),1);
@@ -446,10 +317,7 @@ for s = 1:32;
         
         %%% durations
         durations(1:length(names)) = {0};
-%         durations(7) = {std1_RT'};
-%         durations(1) = {std_RT'};
-%         durations(2) = {prd_RT'};
-        
+
         %%% onsets
         std5onsets = T.std_onset; 
         std5onsets(1:6:end) = [];
@@ -467,16 +335,6 @@ for s = 1:32;
         n_trials_SS(s,r)=length(ind_SS);
         n_trials_SAS(s,r)=length(ind_SAS);
         
-       % onsets{10} = T.warn_onset;
-       % onsets{11} = T.motor;
-       
-%        if numel(onsets{1})~=numel(pmod(1).param{1})
-%            error('problem with regressor length')
-%        end
-%        if numel(onsets{2})~=numel(pmod(2).param{1})
-%            error('problem with regressor length')
-%        end
-
         %%% screen and remove empty regressors
         exclude_reg = [];
         for o = 1:length(onsets)
