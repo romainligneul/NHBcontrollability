@@ -59,13 +59,10 @@ F.FIR.do = 0;
 %     F.doest = 1;
 % end;
 
-F.contrastleft = {};%, 'QUEST_HIT_curiosity^1', 'QUEST_HIT_curiosity^1', 'QUEST_CR_curiosity^1', 'RESP_HIT_surprise^1','RESP_HIT_surprise^1', 'RESP_CR_surprise^1'}; %'seen', 'unseen', 'seen', 'unseen'};
-F.contrastright = {};%, 'QUEST_CR_curiosity^1', 'QUEST_MISS_curiosity^1', 'QUEST_MISS_curiosity^1', 'RESP_CR_surprise^1', 'RESP_MISS_surprise^1', 'RESP_MISS_surprise^1'};% 'unknown_quest', 'unknownquest_curiosity^1 '};%'hashtag', 'hashtag', 'unseen', 'seen'};
+F.contrastleft = {};
+F.contrastright = {};
 
 F.estfunc = 'spm_spm'; % or spm_spm_Bayes or spm_spm_quickest
-% F.check_imgsuf =['.*ResMS.img'];
-% F.check_roidir = '';
-% F.check_roisuf = ['.*img'];
 
 %%%%% COMMON INFO
 
@@ -281,8 +278,6 @@ for s = 1:32;
 
         state = L.explore.log(:,8);
         std_muX = muX(:,cond_ind<2);
-        
-%             
 
         n=0;
 
@@ -324,11 +319,8 @@ for s = 1:32;
         n=n+1;
         if prdpair_control(1)==0
             names{n} = [sprintf('stdC_%i_%0.2d_pos',r, 1)];
-%             pmod(n).name{1} = [sprintf('std_order%0.2d_pos', 1)];
         else
-            names{n} = [sprintf('stdU_%i_%0.2d_neg',r, 1)];
-%             pmod(n).name{1} = [sprintf('std_order%0.2d_neg', 1)];
-            
+            names{n} = [sprintf('stdU_%i_%0.2d_neg',r, 1)];           
         end
         
         onsets{n} = T.std_onset(1:6);
@@ -338,77 +330,24 @@ for s = 1:32;
             n=n+1;
             if prdpair_control(mbl)==0 && prdpair_control(mbl-1)==0
                 names{n} = [sprintf('stdC_%i_%0.2d_sta',r, mbl)];
-%                 pmod(n).name{1} = [sprintf('std_order%0.2d_sta', mbl)];
             elseif prdpair_control(mbl)==0 && prdpair_control(mbl-1)==1
                 names{n} = [sprintf('stdC_%i_%0.2d_pos',r, mbl)];
-%                 pmod(n).name{1} = [sprintf('std_order%0.2d_pos', mbl)];
             elseif prdpair_control(mbl)==1 && prdpair_control(mbl-1)==1
                 names{n} = [sprintf('stdU_%i_%0.2d_sta',r, mbl)];
-%                 pmod(n).name{1} = [sprintf('std_order%0.2d_sta', mbl)];
             else
                 names{n} = [sprintf('stdU_%i_%0.2d_neg',r, mbl)];
-%                 pmod(n).name{1} = [sprintf('std_order%0.2d_neg', mbl)];                
             end    
             onsets{n} = T.std_onset(6*(mbl-1)+1:6*mbl);
             orth{n} = false;
-%             pmod(n).param{1} = [-5 -3 -1 1 3 5];
-%             pmod(n).poly{1} = 1;
         end           
             
         durations(1:length(names)) = {0};
-        
-%         dummat = [];
-%         for ppp = 1:length(pmod(1).param)
-%             dummat = [dummat,pmod(1).param{ppp}];
-%         end
-%         dumr = corrcoef(dummat);
-% %         summed_r = summed_r+dumr;
-        
-       % names{10} = 'warn';
-       % names{11} = 'motor';
-       
-        %%% specify orthogonalization per condition
 
-        
-        %%% durations
-        durations(1:length(names)) = {0};
-%         durations(7) = {std1_RT'};
-%         durations(1) = {std_RT'};
-%         durations(2) = {prd_RT'};
-        
-
-       % onsets{10} = T.warn_onset;
-       % onsets{11} = T.motor;
-       
-%        if numel(onsets{1})~=numel(pmod(1).param{1})
-%            error('problem with regressor length')
-%        end
-%        if numel(onsets{2})~=numel(pmod(2).param{1})
-%            error('problem with regressor length')
-%        end
-% 
-%         %%% screen and remove empty regressors
-%         exclude_reg = [];
-%         for o = 1:length(onsets)
-%             if isempty(onsets{o});
-%                 exclude_reg(end+1)=o;
-%                 disp(['subject ' num2str(s) ': ' names{o} ' missing in run ' num2str(r) '!'])
-%             end
-%         end
-%         onsets(exclude_reg)=[];names(exclude_reg)=[];durations(exclude_reg)=[];
-%         orth(exclude_reg) = [];
-%         try
-%             pmod(exclude_reg) = [];
-%         end
-%         
         %%% save GLM
         save([sdir sprintf('%03d',s) '_runmat_b' num2str(r) '.mat'], 'names', 'onsets', 'durations', 'orth', 'pmod');
-%         warning('pmod excluded from mat file!')
         F.run_mat{s}{r} = [sdir sprintf('%03d',s) '_runmat_b' num2str(r) '.mat'];
 
     end
 end
-
-% summed_r/(32*4)
 
 save([F.firstlevpath 'infos_FIPRT.mat'], 'F', 'I', 'R', 'T');
