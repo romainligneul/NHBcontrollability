@@ -59,8 +59,8 @@ F.FIR.do = 0;
 %     F.doest = 1;
 % end;
 
-F.contrastleft = {};%, 'QUEST_HIT_curiosity^1', 'QUEST_HIT_curiosity^1', 'QUEST_CR_curiosity^1', 'RESP_HIT_surprise^1','RESP_HIT_surprise^1', 'RESP_CR_surprise^1'}; %'seen', 'unseen', 'seen', 'unseen'};
-F.contrastright = {};%, 'QUEST_CR_curiosity^1', 'QUEST_MISS_curiosity^1', 'QUEST_MISS_curiosity^1', 'RESP_CR_surprise^1', 'RESP_MISS_surprise^1', 'RESP_MISS_surprise^1'};% 'unknown_quest', 'unknownquest_curiosity^1 '};%'hashtag', 'hashtag', 'unseen', 'seen'};
+F.contrastleft = {};
+F.contrastright = {};
 
 F.estfunc = 'spm_spm'; % or spm_spm_Bayes or spm_spm_quickest
 % F.check_imgsuf =['.*ResMS.img'];
