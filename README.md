@@ -5,3 +5,8 @@ In order to run the scripts contained in the StatsFigures folder, you need to cl
 The data folder must be placed into the same folder as this repository and named AnonymizedData.
 
 Note that the AnalysisFunctions folders contains also the code used for computational modeling which is not necessary to generate the figures. The code used to analyze the fMRI data (from preprocessing to second-level analyses) is provided as is. In order to run it, it is necessary to download the anonymized data. Please get in touch if you are interested.
+
+The scripts rely on several external toolboxes which can be found in ExternalTools. The main ones are:
+- the VBA toolbox (for VB model fitting): https://mbb-team.github.io/VBA-toolbox/
+- the gramm toolbox (for plotting): https://github.com/piermorel/gramm
+- the MI toolbox (for information theoretic computations): https://github.com/Craigacp/MIToolbox
