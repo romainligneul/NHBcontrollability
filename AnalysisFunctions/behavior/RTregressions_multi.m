@@ -20,9 +20,7 @@ if exist('plog', 'var')==1 % fmri stress
             % reconstruct arbitrator
             assert(strcmp(func2str(ModStruct{m}.obsf),'o_MBtype2_wOM2_bDEC1'), 'RT regression only implemented for the best-fitting model')
             std_sigomega=VBA_sigmoid(muX_std(49,:), 'slope', ModStruct{m}.phiFitted(s,2), 'center', ModStruct{m}.phiFitted(s,3));
-            %             std_sigomega=sigomega(u{s}(10,:)==1 & u{s}(1,:)==1);
             
-            % binarize RTs
             RT = u{s}(15, u{s}(10,:)==1 & u{s}(1,:)==1);
             %     RT(RT>15)=NaN;
             remove_RT = RT>nanmean(RT)+3*nanstd(RT);
