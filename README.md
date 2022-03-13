@@ -12,4 +12,5 @@ The scripts rely on several external toolboxes which can be found in ExternalToo
 - the VBA toolbox (for VB model fitting): https://mbb-team.github.io/VBA-toolbox/
 - the gramm toolbox (for plotting): https://github.com/piermorel/gramm
 - the MI toolbox (for information theoretic computations): https://github.com/Craigacp/MIToolbox
+
 Thanks to the authors of these open source tools for their amazing work.
